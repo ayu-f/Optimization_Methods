@@ -3,7 +3,6 @@ import method.input_general
 
 from method.input_general import input_general
 from method.input_general import input_general_f
-from
 
 if __name__ == '__main__':
     a = 0
