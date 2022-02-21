@@ -4,7 +4,7 @@ def input_general_f(filename: str):
     signed_indexes = [int(x) for x in
                       file.readline().split()]
     for i in signed_indexes:
-        if i - 1 not in range(n):
+        if i not in range(n):
             raise Exception("Invalid input")
     type = file.readline().split()[0]
     if type != "min" and type != "max":
@@ -46,14 +46,14 @@ def input_general_f(filename: str):
             A3[j][i] = data[i]
         b3[j] = data[n]
 
-    return signed_indexes, c1, A1, b1, A2, b2, A3, b3
+    return signed_indexes, c1, type, A1, b1, A2, b2, A3, b3
 
 
 def input_general():
     n = int(input("Введите число переменных задачи: "))
     signed_indexes = [int(x) for x in input("Введите номера переменных для которых введено положительное ограничение на знак:").split()]
     for i in signed_indexes:
-        if i - 1 not in range(n):
+        if i not in range(n):
             print("Некоректный индекс.")
             raise Exception("Invalid input")
     type = input("Введите тип задачи (min или max): ")
@@ -96,7 +96,7 @@ def input_general():
             A3[j][i] = data[i]
         b3[j] = data[n]
 
-    return signed_indexes, c1, A1, b1, A2, b2, A3, b3
+    return signed_indexes, c1, type, A1, b1, A2, b2, A3, b3
 
 
 
