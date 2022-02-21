@@ -19,7 +19,7 @@ def takeColumn(matrix: list, indx: int):
     return [matrix_line[indx] for matrix_line in matrix]
 
 
-def to_dual_task(A: list, b: list, c: list, sign_limits: list, value_limits, type_opt: string):
+def to_dual_task(A: list, b: list, c: list, sign_limits: list, value_limits: list, type_opt: string):
     A_dual = list()
     limSigns_dual = list()
     valuesLimits_dual = list()
