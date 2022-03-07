@@ -8,43 +8,38 @@ def addSupportiveBasicValue(A : list, index : int, coef : float):
         if i == index:
             A[i].append(coef)
         else:
-            A[i].append(0)
+            A[i].append(0.)
     return
 
 
-def parse_to_canon(A : list, b : list, c : list, v : float, sign_limits : list, type_opt : string, value_limits : list):
+def parse_to_canon(A : list, b : list, c : list[float], v : float, sign_limits : list, type_opt : string, value_limits : list):
     # init matrixes and vectors
     A_c = copyMatr(A)
     b_c = copyVec(b)
     N = list()
     B = list()
     c_c = list()
-    v_c = 0
+    v_c = 0.
     originalSize = len(c)
     originalVars = list()
 
-    # first, remake target-function
-    if type_opt == "min":
-        c_c = [coef * -1 for coef in c]
-        v_c = v * -1
-    else:
-        c_c = [coef for coef in c]
-        v_c = v
+    c_c = [coef for coef in c]
+    v_c = v
 
     for i in range(len(sign_limits)):
         if sign_limits[i] == "<=":
             B.append(len(c_c))
-            addSupportiveBasicValue(A_c, i, 1)
-            c_c.append(0)
+            addSupportiveBasicValue(A_c, i, 1.)
+            c_c.append(0.)
         elif sign_limits[i] == ">=":
             B.append(len(c_c))
-            addSupportiveBasicValue(A_c, i, -1)
-            c_c.append(0)
+            addSupportiveBasicValue(A_c, i, -1.)
+            c_c.append(0.)
 
     for i in range(originalSize):
         if i not in value_limits:
             for A_line in A_c:
-                A_line.append(A_line[i] * -1)
+                A_line.append(A_line[i] * -1.)
             c_c.append(-1 * c_c[i])
             originalVars.append([i, i, len(c_c) - 1])
 

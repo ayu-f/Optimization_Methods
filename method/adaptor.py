@@ -5,7 +5,7 @@ def adapt(signed_indexes: list[int], c1: list[float], type: str, A1: list[list[f
     A = list()
     b = list()
     c = copy.deepcopy(c1)
-    v = 0
+    v = 0.
     sign_limits = list()
     type_opt = type
     value_limits = copy.deepcopy(signed_indexes)
