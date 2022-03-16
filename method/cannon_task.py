@@ -1,6 +1,6 @@
+import copy
 import string
 
-from dual_task import copyVec, copyMatr
 
 
 def addSupportiveBasicValue(A : list, index : int, coef : float):
@@ -14,8 +14,8 @@ def addSupportiveBasicValue(A : list, index : int, coef : float):
 
 def parse_to_canon(A : list, b : list, c : list[float], v : float, sign_limits : list, type_opt : string, value_limits : list):
     # init matrixes and vectors
-    A_c = copyMatr(A)
-    b_c = copyVec(b)
+    A_c = copy.deepcopy(A)
+    b_c = copy.deepcopy(b)
     N = list()
     B = list()
     c_c = list()
@@ -28,11 +28,9 @@ def parse_to_canon(A : list, b : list, c : list[float], v : float, sign_limits :
 
     for i in range(len(sign_limits)):
         if sign_limits[i] == "<=":
-            B.append(len(c_c))
             addSupportiveBasicValue(A_c, i, 1.)
             c_c.append(0.)
         elif sign_limits[i] == ">=":
-            B.append(len(c_c))
             addSupportiveBasicValue(A_c, i, -1.)
             c_c.append(0.)
 
@@ -43,10 +41,7 @@ def parse_to_canon(A : list, b : list, c : list[float], v : float, sign_limits :
             c_c.append(-1 * c_c[i])
             originalVars.append([i, i, len(c_c) - 1])
 
-    for i in range(len(c_c)):
-        if i not in B:
-            N.append(i)
-    return N, B, A_c, b_c, c_c, v_c, originalSize, originalVars
+    return A_c, b_c, c_c, v_c, originalSize, originalVars
 
 
 def print_task_as_canon(A : list, b : list, c : list, v : float):

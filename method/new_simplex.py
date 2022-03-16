@@ -141,7 +141,7 @@ def simplex_init(source_A: list[list[float]], source_b: list[float], source_c: l
                                                                 s_basis, s_nulls,
                                                                 s_is_max)
     if abs(s_x[n]) > eps:
-        return -1
+        raise Exception("No solution")
     if n in s_basis:
         e = -1
         for i in s_nulls:

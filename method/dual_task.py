@@ -1,25 +1,16 @@
+import copy
 import string
 
 
-def copyMatr(A: list):
-    A_copy = list()
-    for i in range(len(A)):
-        A_copy.append([A[i][j] for j in range(len(A[i]))])
-    return A_copy
 
 
-def copyVec(A: list):
-    A_copy = list()
-    for i in range(len(A)):
-        A_copy.append(float(A[i]))
-    return A_copy
 
 
 def takeColumn(matrix: list, indx: int):
     return [matrix_line[indx] for matrix_line in matrix]
 
 
-def to_dual_task(A: list, b: list, c: list, sign_limits: list, value_limits: list, type_opt: string):
+def to_dual_task(A: list, b: list, c: list, sign_limits: list, type_opt: string, value_limits: list):
     A_dual = list()
     limSigns_dual = list()
     valuesLimits_dual = list()
@@ -27,19 +18,21 @@ def to_dual_task(A: list, b: list, c: list, sign_limits: list, value_limits: lis
     limitsCnt = len(sign_limits)
     valuesCnt = len(c)
 
-    A_tmp = copyMatr(A)
+    b_tmp = copy.deepcopy(b)
+    A_tmp = copy.deepcopy(A)
+    sign_limits_tmp = copy.deepcopy(sign_limits)
 
     # change all limits expressions
     for i in range(limitsCnt):
-        if (sign_limits[i] == ">=" and type_opt == "max") or (sign_limits[i] == "<=" and type_opt == "min"):
-            if sign_limits[i] == ">=":
-                sign_limits[i] = "<="
+        if (sign_limits_tmp[i] == ">=" and type_opt == "max") or (sign_limits_tmp[i] == "<=" and type_opt == "min"):
+            if sign_limits_tmp[i] == ">=":
+                sign_limits_tmp[i] = "<="
             else:
-                sign_limits[i] = ">="
+                sign_limits_tmp[i] = ">="
 
             for j in range(len(A_tmp[i])):
-                A_tmp[i][j] = -1 * A_tmp[i][j]
-            b[i] = b[i] * -1
+                A_tmp[i][j] = -A_tmp[i][j]
+            b_tmp[i] = -b_tmp[i]
 
     # set dual target extremum
     if type_opt == "min":
@@ -50,8 +43,8 @@ def to_dual_task(A: list, b: list, c: list, sign_limits: list, value_limits: lis
         expr_d_sign = ">="
 
     # swap b and c
-    c_d = b
-    b_d = c
+    c_d = b_tmp
+    b_d = copy.deepcopy(c)
 
     # trasponate
     for i in range(len(A_tmp[0])):
@@ -66,7 +59,7 @@ def to_dual_task(A: list, b: list, c: list, sign_limits: list, value_limits: lis
 
     # set values signs
     for i in range(limitsCnt):
-        if sign_limits[i] != "=":
+        if sign_limits_tmp[i] != "=":
             valuesLimits_dual.append(i)
 
     return A_dual, b_d, c_d, limSigns_dual, type_opt_dual, valuesLimits_dual
