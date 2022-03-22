@@ -72,7 +72,7 @@ def input_general():
             A1[j][i] = data[i]
         b1[j] = data[n]
 
-    m2 = int(input("Введите число линейных ограничений с <=: "))
+    m2 = int(input("Введите число линейных ограничений с >=: "))
     b2 = [0. for i in range(m2)]
     A2 = [[0. for i in range(n)] for j in range(m2)]
     for j in range(m2):
@@ -84,7 +84,7 @@ def input_general():
             A2[j][i] = data[i]
         b2[j] = data[n]
 
-    m3 = int(input("Введите число линейных ограничений с >=: "))
+    m3 = int(input("Введите число линейных ограничений с <=: "))
     b3 = [0. for i in range(m3)]
     A3 = [[0. for i in range(n)] for j in range(m3)]
     for j in range(m3):
