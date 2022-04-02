@@ -1,15 +1,29 @@
-from transport_problem import TransportProblem
-from input import input_
+from func_minimum import Searcher
+
+def func(x):
+    return x**4 + 2 * x**2 + 4 * x + 1  # x^4 +2x^2 +4x + 1
+
 
 def main():
-    """c = [[8, 9, 7, 5], [5, 6, 4, 4], [7, 8, 7, 7], [5, 2, 1, 1], [4, 3, 4, 2]]
-    a = [11, 15, 10, 10]
-    b = [11, 8, 10, 9, 8]"""
-    A, B, C = input_("tproblem.txt")
+    eps = [0.1, 0.01, 0.001]
+    a = -1
+    b = 0
+    searcher = Searcher(func)
+    print("**** GOLDEN SELECTION ****")
+    for i in range(len(eps)):
+        ans, count_calls = searcher.golden_section(a, b, eps[i])
+        print(f'x = {round(ans, i + 2)}')
+        print(f'f(x) =  {round(func(ans), i + 2)}')
+        print(f'Count of function calls: {count_calls}')
+        print(f'Theoretical count of function calls: PASS')
 
-    t = TransportProblem(C, A, B)
-    t.solve()
-
+    print("\n\n**** DICHOTOMY METHOD ****")
+    for i in range(len(eps)):
+        ans, count_calls = searcher.dichotomy_method(a, b, eps[i])
+        print(f'x = {round(ans, i + 2)}')
+        print(f'f(x) =  {round(func(ans), i + 2)}')
+        print(f'Count of function calls: {count_calls}')
+        print(f'Theoretical count of function calls: {searcher.th_count_calls_dichotomy(a, b, eps[i])}')
 
 
 main()
