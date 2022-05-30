@@ -1,0 +1,110 @@
+\documentclass[14pt,a4paper,article,oneside]{ncc}
+\usepackage[a4paper,left=3cm,right=1.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage{fancyhdr}
+\pagestyle{plain}
+
+
+\usepackage{listings}
+
+\begin{document}
+% Title page
+    \begin{titlepage}
+        \thispagestyle{empty}
+        \begin{center}
+            \textsc{
+                Санкт-Петербургский политехнический университет имени Петра Великого \\[5mm]
+                Институт прикладной математики и механики\\[2mm]
+                Высшая школа прикладной математики и физики
+            }
+            \vfill
+            \textbf{\large
+            Направление подготовки\\
+            «01.03.02 Прикладная математика и информатика»\\[3mm]
+            }
+            \vfill
+            \textbf{\large
+            Курсовая работа «Сравнительный анализ градиентных методов второго порядка»\\[5mm]
+            Дисциплина «Методы оптимизации»\\
+            }
+        \end{center}
+
+        \vfill
+
+        \begin{minipage}{0.5\textwidth}
+            \begin{flushleft}
+                Выполнили студенты группы\\5030102/90201:
+            \end{flushleft}
+        \end{minipage}
+        \begin{minipage}{0.5\textwidth}
+            \begin{flushright}
+                Габдушев Р.М.\\
+                Фисюк А.Ю.\\
+                Ахметшин Р.И.
+            \end{flushright}
+        \end{minipage}\\\\\\
+        \begin{minipage}{0.5\textwidth}
+            \begin{flushleft}
+                Преподаватель:
+            \end{flushleft}
+        \end{minipage}
+        \begin{minipage}{0.5\textwidth}
+            \begin{flushright}
+                Родионова Е.А.
+            \end{flushright}
+        \end{minipage}\\
+
+        \vfill
+
+        \begin{center}
+            Санкт-Петербург\\
+            \theyear\ г.
+        \end{center}
+
+    \end{titlepage}
+
+    \tableofcontents
+    \newpage
+    \listoffigures
+
+    % Введение
+    \newpage
+    \input{introduction.tex}
+
+    % Постановка задачи
+    \newpage
+    \input{problem.tex}
+
+    % Описание методов
+    \input{methods.tex}
+
+    % Выбор функций для оптимизации
+    \newpage
+    \input{functions.tex}
+
+    % Применимость методов
+    \input{applicability.tex}
+
+    % Результаты
+    \newpage
+    \input{results.tex}
+
+    % Заключение
+    \newpage
+    \input{conclusion.tex}
+
+    % Список литературы
+    \newpage
+    \input{literature.tex}
+
+
+
+\end{document}
